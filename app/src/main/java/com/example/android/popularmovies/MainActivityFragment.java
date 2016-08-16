@@ -1,12 +1,14 @@
 package com.example.android.popularmovies;
 
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.GridView;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -32,6 +34,7 @@ public class MainActivityFragment extends Fragment {
             new AndroidFlavor("Lollipop", "5.0-5.1.1", R.drawable.lollipop)
     };
 
+
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -40,6 +43,7 @@ public class MainActivityFragment extends Fragment {
         }
         else {
             flavorList = savedInstanceState.getParcelableArrayList("flavors");
+            System.out.println("LA LISTAAAA: " + flavorList);
         }
     }
 
@@ -52,7 +56,8 @@ public class MainActivityFragment extends Fragment {
         super.onSaveInstanceState(outState);
     }
 
-    @Override
+    /*
+   @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_main, container, false);
@@ -64,6 +69,29 @@ public class MainActivityFragment extends Fragment {
         listView.setAdapter(flavorAdapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                AndroidFlavor flavorClick = flavorAdapter.getItem(i);
+                flavorClick.versionName += ":)";
+                flavorAdapter.notifyDataSetChanged();
+            }
+        });
+
+        return rootView;
+    }*/
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View rootView = inflater.inflate(R.layout.fragment_main, container, false);
+
+        flavorAdapter = new AndroidFlavorAdapter(getActivity(), flavorList);
+
+        // Get a reference to the ListView, and attach this adapter to it.
+        GridView gridView = (GridView) rootView.findViewById(R.id.listview_flavor);
+        gridView.setAdapter(flavorAdapter);
+
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 AndroidFlavor flavorClick = flavorAdapter.getItem(i);
