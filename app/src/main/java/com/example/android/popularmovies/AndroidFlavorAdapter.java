@@ -1,8 +1,6 @@
 package com.example.android.popularmovies;
 
 import android.app.Activity;
-import android.provider.Settings;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,7 +40,6 @@ public class AndroidFlavorAdapter extends ArrayAdapter<AndroidFlavor> {
      */
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-
         // Gets the AndroidFlavor object from the ArrayAdapter at the appropriate position
         AndroidFlavor androidFlavor = getItem(position);
 
@@ -62,7 +59,6 @@ public class AndroidFlavorAdapter extends ArrayAdapter<AndroidFlavor> {
 
         TextView versionNumberView = (TextView) convertView.findViewById(R.id.list_item_versionnumber_textview);
         versionNumberView.setText(androidFlavor.versionNumber);
-        System.out.println("LOGUEANDOOOO: " + convertView);
         return convertView;
     }
 }
