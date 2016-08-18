@@ -8,11 +8,11 @@ public class AndroidFlavor implements Parcelable{
     String versionNumber;
     int image; // drawable reference id
 
-    public AndroidFlavor(String vName, String vNumber, int image)
+    public AndroidFlavor(String vName)
     {
         this.versionName = vName;
-        this.versionNumber = vNumber;
-        this.image = image;
+        this.versionNumber = "0.0";
+        this.image = R.drawable.cupcake;
     }
 
     private AndroidFlavor(Parcel in){

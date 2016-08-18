@@ -18,9 +18,15 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class FetchMoviesTask extends AsyncTask<String, Void, String[]> {
+public class FetchMoviesTask extends AsyncTask<String, Void, AndroidFlavor[]> {
 
     private final String LOG_TAG = FetchMoviesTask.class.getSimpleName();
+    private AndroidFlavorAdapter mAndroidFlavorAdapter;
+
+    public FetchMoviesTask(AndroidFlavorAdapter adapter) {
+
+        mAndroidFlavorAdapter = adapter;
+    }
 
     /**
      * Take the String representing the complete forecast in JSON Format and
@@ -29,7 +35,7 @@ public class FetchMoviesTask extends AsyncTask<String, Void, String[]> {
      * Fortunately parsing is easy:  constructor takes the JSON string and converts it
      * into an Object hierarchy for us.
      */
-    private String[] getMovieDataFromJson(String moviesJsonStr)
+    private AndroidFlavor[] getMovieDataFromJson(String moviesJsonStr)
             throws JSONException {
 
         JSONObject moviesJson = new JSONObject(moviesJsonStr);
@@ -37,19 +43,13 @@ public class FetchMoviesTask extends AsyncTask<String, Void, String[]> {
 
 
         //String[] resultStrs = new String[numDays];
-        String[] resultStrs = new String[moviesArray.length()];
+        AndroidFlavor[] resultStrs = new AndroidFlavor[moviesArray.length()];
 
-
-
-        for(int i = 0; i <= moviesArray.length(); i++) {
-            Log.v(LOG_TAG, "************ Array.length() ***********" + moviesArray.length());
-            if(i >= moviesArray.length()) {
-                return null;
-            } else {
-                //System.out.print(moviesJson);
-                resultStrs[i] = moviesArray.get(i).toString();
-                Log.v(LOG_TAG, "************ resultStrs ***********" + resultStrs[i]);
-            }
+        for(int i = 0; i < moviesArray.length(); i++) {
+            JSONObject movieJson = moviesArray.getJSONObject(i);
+            String title = movieJson.getString("title");
+            resultStrs[i] = new AndroidFlavor(title);
+            Log.v(LOG_TAG, "************ resultStrs ***********" + resultStrs[i]);
         }
 
         return resultStrs;
@@ -57,7 +57,7 @@ public class FetchMoviesTask extends AsyncTask<String, Void, String[]> {
     }
 
     @Override
-    protected String[] doInBackground(String... params) {
+    protected AndroidFlavor[] doInBackground(String... params) {
 
         // If there's no zip code, there's nothing to look up.  Verify size of params.
             /*if (params.length == 0) {
@@ -149,14 +149,14 @@ public class FetchMoviesTask extends AsyncTask<String, Void, String[]> {
         return null;
     }
 
-    //@Override
-        /*protected void onPostExecute(String[] result) {
-            if (result != null) {
-                mForecastAdapter.clear();
-                for (String dayForecastStr : result) {
-                    mForecastAdapter.add(dayForecastStr);
-                }
-                // New data is back from the server.
+    @Override
+    protected void onPostExecute(AndroidFlavor[] result) {
+        if (result != null) {
+            mAndroidFlavorAdapter.clear();
+            for (AndroidFlavor flavor : result) {
+                mAndroidFlavorAdapter.add(flavor);
             }
-        }*/
+            // New data is back from the server.
+        }
+    }
 }
