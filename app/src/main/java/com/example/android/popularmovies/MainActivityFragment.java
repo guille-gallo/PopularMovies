@@ -49,40 +49,11 @@ public class MainActivityFragment extends Fragment {
         }
     }
 
-    public MainActivityFragment() {
-        FetchMoviesTask movieTask = new FetchMoviesTask();
-        System.out.println("+++++ ++++  ++++  EL OBJECTOOOOOO: " + movieTask);
-    }
-
     @Override
     public void onSaveInstanceState(Bundle outState) {
         outState.putParcelableArrayList("flavors", flavorList);
         super.onSaveInstanceState(outState);
     }
-
-    /*
-   @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_main, container, false);
-
-        flavorAdapter = new AndroidFlavorAdapter(getActivity(), flavorList);
-
-        // Get a reference to the ListView, and attach this adapter to it.
-        ListView listView = (ListView) rootView.findViewById(R.id.listview_flavor);
-        listView.setAdapter(flavorAdapter);
-
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                AndroidFlavor flavorClick = flavorAdapter.getItem(i);
-                flavorClick.versionName += ":)";
-                flavorAdapter.notifyDataSetChanged();
-            }
-        });
-
-        return rootView;
-    }*/
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -108,16 +79,8 @@ public class MainActivityFragment extends Fragment {
     }
 
     public void updateMovie(){
-        FetchMoviesTask movieTask = new FetchMoviesTask();
-        /*SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
-
-        // If there's no value stored, we fallback to the default location
-        String location = prefs.getString(getString(R.string.pref_location_key), getString(R.string.pref_location_default));
-        String temperature = prefs.getString("temperature", "metric");*/
-
-        movieTask.execute(); //what next?.
-
-
+        FetchMoviesTask movieTask = new FetchMoviesTask(flavorAdapter);
+        movieTask.execute(); // executes http request and updates adapter
     }
 
     @Override

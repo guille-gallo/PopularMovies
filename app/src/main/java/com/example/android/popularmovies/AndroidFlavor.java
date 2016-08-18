@@ -15,6 +15,13 @@ public class AndroidFlavor implements Parcelable{
         this.image = image;
     }
 
+    public AndroidFlavor(String vName)
+    {
+        this.versionName = vName;
+        this.versionNumber = "0.0";
+        this.image = R.drawable.cupcake;
+    }
+
     private AndroidFlavor(Parcel in){
         versionName = in.readString();
         versionNumber = in.readString();
