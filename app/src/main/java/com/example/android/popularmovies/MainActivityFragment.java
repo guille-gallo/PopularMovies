@@ -20,12 +20,14 @@ public class MainActivityFragment extends Fragment {
     private ArrayList<AndroidFlavor> flavorList;
 
 
+
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
 
         if(savedInstanceState == null || !savedInstanceState.containsKey("flavors")) {
-            flavorList = new ArrayList<AndroidFlavor>(flavorList);
+
+            flavorList = new ArrayList();
         }
         else {
             flavorList = savedInstanceState.getParcelableArrayList("flavors");
@@ -68,7 +70,7 @@ public class MainActivityFragment extends Fragment {
         return rootView;
     }
 
-    public void updateMovie(){
+    private void updateMovie(){
         FetchMoviesTask movieTask = new FetchMoviesTask(flavorAdapter);
         movieTask.execute(); // executes http request and updates adapter
     }
