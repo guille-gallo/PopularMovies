@@ -46,7 +46,6 @@ public class FetchMoviesTask extends AsyncTask<String, Void, AndroidFlavor[]> {
         AndroidFlavor[] resultStrs = new AndroidFlavor[moviesArray.length()];
 
 
-        Log.v(LOG_TAG, "************ Array.length() ***********" + moviesArray.length());
         for(int i = 0; i < moviesArray.length(); i++) {
             JSONObject movieJson = moviesArray.getJSONObject(i);
             String title = movieJson.getString("title");
