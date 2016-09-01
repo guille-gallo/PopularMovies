@@ -21,9 +21,10 @@ import java.util.Arrays;
 public class FetchMoviesTask extends AsyncTask<String, Void, AndroidFlavor[]> {
 
     private final String LOG_TAG = FetchMoviesTask.class.getSimpleName();
-
     private AndroidFlavorAdapter mAndroidFlavorAdapter;
+
     public FetchMoviesTask(AndroidFlavorAdapter adapter) {
+
         mAndroidFlavorAdapter = adapter;
     }
 
@@ -47,8 +48,8 @@ public class FetchMoviesTask extends AsyncTask<String, Void, AndroidFlavor[]> {
 
         Log.v(LOG_TAG, "************ Array.length() ***********" + moviesArray.length());
         for(int i = 0; i < moviesArray.length(); i++) {
-            JSONObject movieJSON = moviesArray.getJSONObject(i);
-            String title = movieJSON.getString("title");
+            JSONObject movieJson = moviesArray.getJSONObject(i);
+            String title = movieJson.getString("title");
             resultStrs[i] = new AndroidFlavor(title);
             Log.v(LOG_TAG, "************ resultStrs ***********" + resultStrs[i]);
         }
