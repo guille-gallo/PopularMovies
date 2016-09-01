@@ -25,7 +25,7 @@ public class MainActivityFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         if(savedInstanceState == null || !savedInstanceState.containsKey("flavors")) {
-            flavorList = new ArrayList<AndroidFlavor>(flavorList);
+            flavorList = new ArrayList<>();
         }
         else {
             flavorList = savedInstanceState.getParcelableArrayList("flavors");
