@@ -6,13 +6,14 @@ import android.os.Parcelable;
 public class AndroidFlavor implements Parcelable{
     String versionName;
     String versionNumber;
+    String imageUri;
     int image; // drawable reference id
 
-    public AndroidFlavor(String vName)
+    public AndroidFlavor(String vName, String vImage)
     {
         this.versionName = vName;
-        this.versionNumber = "0.0";
-        this.image = R.drawable.cupcake;
+        //this.versionNumber = "0.0";
+        this.imageUri = vImage;
     }
 
     private AndroidFlavor(Parcel in){

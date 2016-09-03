@@ -8,6 +8,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.List;
 
 public class AndroidFlavorAdapter extends ArrayAdapter<AndroidFlavor> {
@@ -53,13 +55,15 @@ public class AndroidFlavorAdapter extends ArrayAdapter<AndroidFlavor> {
         }
 
         ImageView iconView = (ImageView) convertView.findViewById(R.id.list_item_icon);
-        iconView.setImageResource(androidFlavor.image);
+        //iconView.setImageResource(androidFlavor.image);
+        Picasso.with(getContext()).load("http://image.tmdb.org/t/p/w185/" + androidFlavor.imageUri).into(iconView);
 
         TextView versionNameView = (TextView) convertView.findViewById(R.id.list_item_version_name);
         versionNameView.setText(androidFlavor.versionName);
 
-        TextView versionNumberView = (TextView) convertView.findViewById(R.id.list_item_versionnumber_textview);
-        versionNumberView.setText(androidFlavor.versionNumber);
+        /*TextView versionNumberView = (TextView) convertView.findViewById(R.id.list_item_versionnumber_textview);
+        versionNumberView.setText(androidFlavor.versionNumber);*/
+
         return convertView;
     }
 }

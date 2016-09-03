@@ -12,11 +12,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.lang.reflect.Array;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Arrays;
 
 public class FetchMoviesTask extends AsyncTask<String, Void, AndroidFlavor[]> {
 
@@ -48,8 +45,9 @@ public class FetchMoviesTask extends AsyncTask<String, Void, AndroidFlavor[]> {
         for(int i = 0; i < moviesArray.length(); i++) {
             JSONObject movieJson = moviesArray.getJSONObject(i);
             String title = movieJson.getString("title");
-            resultStrs[i] = new AndroidFlavor(title);
-            Log.v(LOG_TAG, "************ resultStrs ***********" + resultStrs[i]);
+            String posterPath = movieJson.getString("poster_path");
+
+            resultStrs[i] = new AndroidFlavor(title, posterPath);
         }
 
         return resultStrs;
