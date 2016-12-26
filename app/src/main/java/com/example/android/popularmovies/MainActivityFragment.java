@@ -1,6 +1,7 @@
 package com.example.android.popularmovies;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -8,8 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
+
 import java.util.ArrayList;
-import java.util.Arrays;
 
 /**
  * A fragment containing the list view of Android versions.
@@ -18,8 +19,6 @@ public class MainActivityFragment extends Fragment {
 
     private AndroidFlavorAdapter flavorAdapter;
     private ArrayList<AndroidFlavor> flavorList;
-
-
 
     @Override
     public void onCreate(Bundle savedInstanceState){
@@ -42,6 +41,12 @@ public class MainActivityFragment extends Fragment {
     }
 
     @Override
+    public void onPause() {
+        super.onPause();
+        System.out.println("on pausaaaa");
+    }
+
+    @Override
     public void onSaveInstanceState(Bundle outState) {
         outState.putParcelableArrayList("flavors", flavorList);
         super.onSaveInstanceState(outState);
@@ -61,9 +66,13 @@ public class MainActivityFragment extends Fragment {
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                AndroidFlavor flavorClick = flavorAdapter.getItem(i);
+
+                Intent intent = new Intent(getActivity(), com.example.android.popularmovies.DetailActivity.class)
+                        .putExtra(Intent.EXTRA_TEXT, flavorAdapter.getItem(i));
+                startActivity(intent);
+                /*AndroidFlavor flavorClick = flavorAdapter.getItem(i);
                 flavorClick.versionName += ":)";
-                flavorAdapter.notifyDataSetChanged();
+                flavorAdapter.notifyDataSetChanged();*/
             }
         });
 
