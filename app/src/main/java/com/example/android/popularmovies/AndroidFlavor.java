@@ -36,7 +36,7 @@ public class AndroidFlavor implements Parcelable{
         parcel.writeInt(image);
     }
 
-    public final Parcelable.Creator<AndroidFlavor> CREATOR = new Parcelable.Creator<AndroidFlavor>() {
+    public final static Parcelable.Creator<AndroidFlavor> CREATOR = new Parcelable.Creator<AndroidFlavor>() {
         @Override
         public AndroidFlavor createFromParcel(Parcel parcel) {
             return new AndroidFlavor(parcel);

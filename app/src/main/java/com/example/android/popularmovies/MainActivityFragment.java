@@ -68,8 +68,9 @@ public class MainActivityFragment extends Fragment {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
                 Intent intent = new Intent(getActivity(), com.example.android.popularmovies.DetailActivity.class)
-                        .putExtra(Intent.EXTRA_TEXT, flavorAdapter.getItem(i));
+                        .putExtra(Intent.EXTRA_TEXT, flavorAdapter.getItem(i).versionName);
                 startActivity(intent);
+                flavorAdapter.notifyDataSetChanged();
                 /*AndroidFlavor flavorClick = flavorAdapter.getItem(i);
                 flavorClick.versionName += ":)";
                 flavorAdapter.notifyDataSetChanged();*/
