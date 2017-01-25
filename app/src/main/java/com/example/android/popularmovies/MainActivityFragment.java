@@ -80,7 +80,7 @@ public class MainActivityFragment extends Fragment {
         return rootView;
     }
 
-    private void updateMovie(){
+    public void updateMovie(){
         FetchMoviesTask movieTask = new FetchMoviesTask(flavorAdapter);
         movieTask.execute(); // executes http request and updates adapter
     }

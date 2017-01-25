@@ -2,7 +2,6 @@ package com.example.android.popularmovies;
 
 
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -33,9 +32,10 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        /*if (id == R.id.action_toprated) {
+
             return true;
-        }
+        }*/
 
         return super.onOptionsItemSelected(item);
     }
